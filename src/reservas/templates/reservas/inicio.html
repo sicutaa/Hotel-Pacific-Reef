@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Hotel Pacific Reef</title>
+</head>
+
+<body>
+    <h1>Hotel Pacific Reef</h1>
+    <h2>Habitaciones disponibles</h2>
+
+    {% for habitacion in habitaciones %}
+        <div>
+            <h3>Habitación {{ habitacion.numero }}</h3>
+            <p>Tipo: {{ habitacion.tipo }}</p>
+            <p>Precio diario: ${{ habitacion.precio_diario }}</p>
+            <p>Estado: {{ habitacion.estado }}</p>
+        </div>
+    {% empty %}
+        <p>No hay habitaciones registradas.</p>
+    {% endfor %}
+</body>
+</html>

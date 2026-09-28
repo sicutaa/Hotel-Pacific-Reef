@@ -1,33 +1,60 @@
+{% load static %}
 <!DOCTYPE html>
 <html lang="es">
 <head>
     <meta charset="UTF-8">
     <title>Hotel Pacific Reef</title>
+    <link rel="stylesheet" href="{% static 'reservas/style.css' %}">
 </head>
 
 <body>
-    <h1>Hotel Pacific Reef</h1>
-    <form method="GET">
-    <label for="fecha_entrada">Fecha de entrada:</label>
-    <input
-        type="date"
-        id="fecha_entrada"
-        name="fecha_entrada"
-        value="{{ fecha_entrada|default:'' }}"
-        required
-    >
+    <nav class="navbar">
+    <div class="logo">
+        Hotel <span>Pacific Reef</span>
+    </div>
 
-    <label for="fecha_salida">Fecha de salida:</label>
-    <input
-        type="date"
-        id="fecha_salida"
-        name="fecha_salida"
-        value="{{ fecha_salida|default:'' }}"
-        required
-    >
+    <div class="nav-links">
+        <a href="#">Inicio</a>
+        <a href="#">Habitaciones</a>
+        <a href="#">Mis reservas</a>
+        <a href="#">Iniciar sesión</a>
+    </div>
+</nav>
+   <section class="hero">
+    <div class="hero-content">
+        <p class="hero-label">HOTEL PACIFIC REEF</p>
+        <h1>Encuentra tu habitación</h1>
+        <p class="hero-text">
+            Consulta la disponibilidad para las fechas de tu estadía.
+        </p>
 
-    <button type="submit">Consultar disponibilidad</button>
-</form>
+        <form method="GET" class="search-form">
+            <div class="field">
+                <label for="fecha_entrada">Fecha de entrada</label>
+                <input
+                    type="date"
+                    id="fecha_entrada"
+                    name="fecha_entrada"
+                    value="{{ fecha_entrada|default:'' }}"
+                    required
+                >
+            </div>
+
+            <div class="field">
+                <label for="fecha_salida">Fecha de salida</label>
+                <input
+                    type="date"
+                    id="fecha_salida"
+                    name="fecha_salida"
+                    value="{{ fecha_salida|default:'' }}"
+                    required
+                >
+            </div>
+
+            <button type="submit">Consultar disponibilidad</button>
+        </form>
+    </div>
+</section>
     <h2>Habitaciones disponibles</h2>
 
     {% for habitacion in habitaciones %}

@@ -55,17 +55,47 @@
         </form>
     </div>
 </section>
-    <h2>Habitaciones disponibles</h2>
+    <section class="rooms-section">
+    <div class="rooms-container">
 
-    {% for habitacion in habitaciones %}
-        <div>
-            <h3>Habitación {{ habitacion.numero }}</h3>
-            <p>Tipo: {{ habitacion.tipo }}</p>
-            <p>Precio diario: ${{ habitacion.precio_diario }}</p>
-            <p>Estado: {{ habitacion.estado }}</p>
+        <p class="section-label">ALOJAMIENTO</p>
+        <h2>Habitaciones disponibles</h2>
+
+        <div class="rooms-grid">
+
+            {% for habitacion in habitaciones %}
+
+                <article class="room-card">
+
+                    <div class="room-header">
+                        <span class="room-type">{{ habitacion.tipo }}</span>
+                        <span class="room-status">{{ habitacion.estado }}</span>
+                    </div>
+
+                    <h3>Habitación {{ habitacion.numero }}</h3>
+
+                    <p class="room-description">
+                        Habitación disponible para tu estadía en Hotel Pacific Reef.
+                    </p>
+
+                    <div class="room-price">
+                        <span>Precio por noche</span>
+                        <strong>${{ habitacion.precio_diario }}</strong>
+                    </div>
+
+                </article>
+
+            {% empty %}
+
+                <div class="empty-state">
+                    <h3>No hay habitaciones disponibles</h3>
+                    <p>Intenta seleccionar otras fechas para tu estadía.</p>
+                </div>
+
+            {% endfor %}
+
         </div>
-    {% empty %}
-        <p>No hay habitaciones registradas.</p>
-    {% endfor %}
+    </div>
+</section>
 </body>
 </html>

@@ -1,4 +1,4 @@
-from datetime import datetime
+from datetime import datetime, date 
 from django.shortcuts import render, get_object_or_404
 from .models import Habitacion, Reserva
 
@@ -51,8 +51,10 @@ def registrar_reserva(request, habitacion_id):
                 fecha_salida_texto,
                 '%Y-%m-%d'
             ).date()
+            if fecha_entrada < date.today():
+                error = 'La fecha de entrada no puede ser anterior a la fecha actual.'
 
-            if fecha_salida <= fecha_entrada:
+            elif fecha_salida <= fecha_entrada:
                 error = 'La fecha de salida debe ser posterior a la fecha de entrada.'
 
             else:
@@ -94,6 +96,7 @@ def registrar_reserva(request, habitacion_id):
                         'cantidad_noches': cantidad_noches,
                         'monto_total': monto_total,
                         'monto_reserva': monto_reserva,
+                        'fecha_actual': date.today(),
                     })
 
         except (ValueError, TypeError):
@@ -102,4 +105,5 @@ def registrar_reserva(request, habitacion_id):
     return render(request, 'reservas/registrar_reserva.html', {
         'habitacion': habitacion,
         'error': error,
+        'fecha_actual': date.today()
     })

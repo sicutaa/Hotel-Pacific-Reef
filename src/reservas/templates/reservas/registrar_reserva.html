@@ -92,6 +92,7 @@
                             id="fecha_entrada"
                             name="fecha_entrada"
                             value="{{ fecha_entrada|date:'Y-m-d' }}"
+                            min="{{ fecha_actual|date:'Y-m-d'}}"
                             required
                         >
                     </div>
@@ -103,6 +104,7 @@
                             id="fecha_salida"
                             name="fecha_salida"
                             value="{{ fecha_salida|date:'Y-m-d' }}"
+                            min="{{ fecha_actual|date:'Y-m-d' }}"
                             required
                         >
                     </div>

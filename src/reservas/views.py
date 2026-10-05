@@ -1,4 +1,4 @@
-from django.shortcuts import render
+from django.shortcuts import render, get_object_or_404
 from .models import Habitacion
 
 
@@ -23,4 +23,10 @@ def inicio(request):
         'habitaciones': habitaciones,
         'fecha_entrada': fecha_entrada,
         'fecha_salida': fecha_salida,
+    })
+def detalle_habitacion(request, habitacion_id):
+    habitacion = get_object_or_404(Habitacion, id=habitacion_id)
+
+    return render(request, 'reservas/detalle_habitacion.html', {
+        'habitacion': habitacion,
     })

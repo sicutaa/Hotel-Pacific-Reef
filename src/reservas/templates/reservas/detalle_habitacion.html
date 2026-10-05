@@ -1,0 +1,78 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Habitación {{ habitacion.numero }} | Hotel Pacific Reef</title>
+
+    <link rel="stylesheet" href="{% static 'reservas/style.css' %}">
+</head>
+
+<body>
+
+<nav class="navbar">
+    <div class="logo">
+        Hotel <span>Pacific Reef</span>
+    </div>
+
+    <div class="nav-links">
+        <a href="{% url 'inicio' %}">Inicio</a>
+        <a href="{% url 'inicio' %}">Habitaciones</a>
+        <a href="#">Mis reservas</a>
+        <a href="#">Iniciar sesión</a>
+    </div>
+</nav>
+
+<section class="detail-section">
+
+    <div class="detail-container">
+
+        <a href="{% url 'inicio' %}" class="back-link">
+            ← Volver a habitaciones
+        </a>
+
+        <div class="detail-card">
+
+            <p class="section-label">{{ habitacion.tipo|upper }}</p>
+
+            <h1>Habitación {{ habitacion.numero }}</h1>
+
+            <p class="detail-description">
+                Disfruta de una cómoda estadía en Hotel Pacific Reef.
+                Esta habitación cuenta con todo lo necesario para tu visita.
+            </p>
+
+            <div class="detail-info">
+
+                <div>
+                    <span>Tipo de habitación</span>
+                    <strong>{{ habitacion.tipo }}</strong>
+                </div>
+
+                <div>
+                    <span>Estado</span>
+                    <strong>{{ habitacion.estado }}</strong>
+                </div>
+
+                <div>
+                    <span>Precio por noche</span>
+                    <strong>${{ habitacion.precio_diario }}</strong>
+                </div>
+
+            </div>
+
+            <button class="reserve-button">
+                Reservar habitación
+            </button>
+
+        </div>
+
+    </div>
+
+</section>
+
+</body>
+</html>

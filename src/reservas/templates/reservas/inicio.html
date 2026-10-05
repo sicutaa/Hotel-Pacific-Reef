@@ -79,9 +79,15 @@
                     </p>
 
                     <div class="room-price">
+                        <div>
                         <span>Precio por noche</span>
                         <strong>${{ habitacion.precio_diario }}</strong>
                     </div>
+
+                    <a href="{% url 'detalle_habitacion' habitacion.id %}" class="room-button">
+                         Ver habitación
+                    </a>
+                </div>
 
                 </article>
 

@@ -11,6 +11,8 @@ class Habitacion(models.Model):
     tipo = models.CharField(max_length=20, choices=TIPO_HABITACION)
     precio_diario = models.DecimalField(max_digits=10, decimal_places=2)
     estado = models.CharField(max_length=20, default='Disponible')
+    caracteristicas = models.TextField(blank=True)
+    equipamiento = models.TextField(blank=True)
 
 
     class Meta:

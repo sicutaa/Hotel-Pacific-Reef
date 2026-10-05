@@ -332,3 +332,10 @@ body {
         padding: 25px;
     }
 }
+.reserve-link {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-decoration: none;
+    box-sizing: border-box;
+}

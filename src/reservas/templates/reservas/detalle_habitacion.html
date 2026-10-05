@@ -63,7 +63,13 @@
                 </div>
 
             </div>
+             <div class="detail-description">
+                <h3>Características</h3>
+                <p>{{ habitacion.caracteristicas }}</p>
 
+                <h3>Equipamiento</h3>
+                <p>{{ habitacion.equipamiento }}</p>
+            </div>   
             <a
                 href="{% url 'registrar_reserva' habitacion.id %}"
                  class="reserve-button reserve-link"

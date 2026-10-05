@@ -1,0 +1,112 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Reservar Habitación {{ habitacion.numero }} | Hotel Pacific Reef</title>
+
+    <link rel="stylesheet" href="{% static 'reservas/style.css' %}">
+</head>
+
+<body>
+
+<nav class="navbar">
+    <div class="logo">
+        Hotel <span>Pacific Reef</span>
+    </div>
+
+    <div class="nav-links">
+        <a href="{% url 'inicio' %}">Inicio</a>
+        <a href="{% url 'inicio' %}">Habitaciones</a>
+        <a href="#">Mis reservas</a>
+        <a href="#">Iniciar sesión</a>
+    </div>
+</nav>
+
+<section class="detail-section">
+    <div class="detail-container">
+
+        <a href="{% url 'detalle_habitacion' habitacion.id %}" class="back-link">
+            ← Volver a la habitación
+        </a>
+
+        <div class="detail-card">
+
+            <p class="section-label">RESERVA</p>
+
+            <h1>Reservar habitación {{ habitacion.numero }}</h1>
+
+            <p class="detail-description">
+                {{ habitacion.tipo }} · ${{ habitacion.precio_diario }} por noche
+            </p>
+            {% if error %}
+    <div class="reservation-error">
+        {{ error }}
+    </div>
+{% endif %}
+
+{% if cantidad_noches %}
+    <div class="reservation-summary">
+        <h3>Resumen de la reserva</h3>
+
+        <p>
+            <span>Cantidad de noches</span>
+            <strong>{{ cantidad_noches }}</strong>
+        </p>
+
+        <p>
+            <span>Total estadía</span>
+            <strong>${{ monto_total }}</strong>
+        </p>
+
+        <p>
+            <span>Monto de reserva (30%)</span>
+            <strong>${{ monto_reserva }}</strong>
+        </p>
+    </div>
+{% endif %}
+
+            <form method="post">
+                {% csrf_token %}
+
+                <div class="reservation-fields">
+
+                    <div class="field">
+                        <label for="fecha_entrada">Fecha de entrada</label>
+                        <input
+                            type="date"
+                            id="fecha_entrada"
+                            name="fecha_entrada"
+                            value="{{ fecha_entrada|date:'Y-m-d' }}"
+                            required
+                        >
+                    </div>
+
+                    <div class="field">
+                        <label for="fecha_salida">Fecha de salida</label>
+                        <input
+                            type="date"
+                            id="fecha_salida"
+                            name="fecha_salida"
+                            value="{{ fecha_salida|date:'Y-m-d' }}"
+                            required
+                        >
+                    </div>
+
+                </div>
+
+                <button type="submit" class="reserve-button">
+                    Continuar reserva
+                </button>
+
+            </form>
+
+        </div>
+    </div>
+</section>
+
+</body>
+</html>

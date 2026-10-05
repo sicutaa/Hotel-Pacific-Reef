@@ -1,0 +1,101 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Reserva confirmada | Hotel Pacific Reef</title>
+
+    <link rel="stylesheet" href="{% static 'reservas/style.css' %}">
+</head>
+
+<body>
+
+<nav class="navbar">
+    <div class="logo">
+        Hotel <span>Pacific Reef</span>
+    </div>
+
+    <div class="nav-links">
+        <a href="{% url 'inicio' %}">Inicio</a>
+        <a href="{% url 'inicio' %}">Habitaciones</a>
+        <a href="#">Mis reservas</a>
+        <a href="#">Iniciar sesión</a>
+    </div>
+</nav>
+
+<section class="detail-section">
+    <div class="detail-container">
+
+        <div class="detail-card">
+
+            <p class="section-label">RESERVA CONFIRMADA</p>
+
+            <h1>¡Tu reserva fue registrada!</h1>
+
+            <p class="detail-description">
+                La reserva fue almacenada correctamente en el sistema.
+            </p>
+
+            <div class="detail-info">
+
+                <div>
+                    <span>Número de reserva</span>
+                    <strong>#{{ reserva.id }}</strong>
+                </div>
+
+                <div>
+                    <span>Habitación</span>
+                    <strong>{{ habitacion.numero }}</strong>
+                </div>
+
+                <div>
+                    <span>Tipo</span>
+                    <strong>{{ habitacion.tipo }}</strong>
+                </div>
+
+                <div>
+                    <span>Entrada</span>
+                    <strong>{{ reserva.fecha_entrada|date:"d/m/Y" }}</strong>
+                </div>
+
+                <div>
+                    <span>Salida</span>
+                    <strong>{{ reserva.fecha_salida|date:"d/m/Y" }}</strong>
+                </div>
+
+                <div>
+                    <span>Noches</span>
+                    <strong>{{ reserva.cantidad_noches }}</strong>
+                </div>
+
+                <div>
+                    <span>Total estadía</span>
+                    <strong>${{ reserva.monto_total }}</strong>
+                </div>
+
+                <div>
+                    <span>Reserva 30%</span>
+                    <strong>${{ reserva.monto_reserva }}</strong>
+                </div>
+
+                <div>
+                    <span>Estado</span>
+                    <strong>{{ reserva.estado }}</strong>
+                </div>
+
+            </div>
+
+            <a href="{% url 'inicio' %}" class="reserve-button reserve-link">
+                Volver al inicio
+            </a>
+
+        </div>
+
+    </div>
+</section>
+
+</body>
+</html>

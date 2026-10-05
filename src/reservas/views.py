@@ -39,6 +39,7 @@ def registrar_reserva(request, habitacion_id):
     if request.method == 'POST':
         fecha_entrada_texto = request.POST.get('fecha_entrada')
         fecha_salida_texto = request.POST.get('fecha_salida')
+        accion = request.POST.get('accion')
 
         try:
             fecha_entrada = datetime.strptime(
@@ -69,6 +70,22 @@ def registrar_reserva(request, habitacion_id):
                     cantidad_noches = (fecha_salida - fecha_entrada).days
                     monto_total = habitacion.precio_diario * cantidad_noches
                     monto_reserva = monto_total * 30 / 100
+
+                    if accion == 'confirmar':
+                        reserva = Reserva.objects.create(
+                            habitacion=habitacion,
+                            fecha_entrada=fecha_entrada,
+                            fecha_salida=fecha_salida,
+                            cantidad_noches=cantidad_noches,
+                            monto_total=monto_total,
+                            monto_reserva=monto_reserva,
+                            estado='Confirmada'
+                        )
+
+                        return render(request, 'reservas/reserva_confirmada.html', {
+                            'reserva': reserva,
+                            'habitacion': habitacion,
+                        })
 
                     return render(request, 'reservas/registrar_reserva.html', {
                         'habitacion': habitacion,

@@ -67,6 +67,17 @@
             <strong>${{ monto_reserva }}</strong>
         </p>
     </div>
+    <form method="post">
+    {% csrf_token %}
+
+        <input type="hidden" name="accion" value="confirmar">
+        <input type="hidden" name="fecha_entrada" value="{{ fecha_entrada|date:'Y-m-d' }}">
+        <input type="hidden" name="fecha_salida" value="{{ fecha_salida|date:'Y-m-d' }}">
+
+        <button type="submit" class="reserve-button">
+            Confirmar reserva
+        </button>
+    </form>
 {% endif %}
 
             <form method="post">

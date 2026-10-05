@@ -1,9 +1,24 @@
 from datetime import datetime, date 
 from django.shortcuts import render, get_object_or_404
 from .models import Habitacion, Reserva
+import requests
 
 
 def inicio(request):
+    temperatura = None
+
+    try:
+        respuesta = requests.get(
+            'https://api.open-meteo.com/v1/forecast?latitude=-36.82&longitude=-73.05&current=temperature_2m',
+            timeout=5
+        )
+
+        respuesta.raise_for_status()
+        datos_clima = respuesta.json()
+        temperatura = datos_clima['current']['temperature_2m']
+
+    except (requests.RequestException, KeyError, ValueError):
+        temperatura = None
     habitaciones = Habitacion.objects.filter(estado='Disponible')
 
     fecha_entrada = request.GET.get('fecha_entrada')
@@ -24,6 +39,7 @@ def inicio(request):
         'habitaciones': habitaciones,
         'fecha_entrada': fecha_entrada,
         'fecha_salida': fecha_salida,
+        'temperatura': temperatura,
     })
 def detalle_habitacion(request, habitacion_id):
     habitacion = get_object_or_404(Habitacion, id=habitacion_id)

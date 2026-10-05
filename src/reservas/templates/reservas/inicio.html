@@ -27,6 +27,11 @@
         <p class="hero-text">
             Consulta la disponibilidad para las fechas de tu estadía.
         </p>
+        {% if temperatura is not None %}
+         <p class="weather-info">
+        🌤️ Clima actual: {{ temperatura }} °C
+        </p>
+        {% endif %}
 
         <form method="GET" class="search-form">
             <div class="field">
